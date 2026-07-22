@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corretor Messias Mogi | Seu imóvel em Mogi das Cruzes</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family: 'Inter', sans-serif;
+      background:#0b0b0b;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* Fundo principal */
+    .hero{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:40px 20px;
+    }
+
+    /* Imagem escura base */
+    .bg-base{
+      position:absolute;
+      inset:0;
+      background:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2000&auto=format&fit=crop') center/cover;
+      filter:brightness(0.25);
+      z-index:1;
+    }
+
+    /* Imagem revelada pelo mouse */
+    .bg-reveal{
+      position:absolute;
+      inset:0;
+      background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000&auto=format&fit=crop') center/cover;
+      z-index:2;
+
+      /* máscara inicial pequena */
+      clip-path: circle(120px at 50% 50%);
+      transition: clip-path 0.08s linear;
+    }
+
+    /* Overlay escuro */
+    .overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to bottom,
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.65));
+      z-index:3;
+    }
+
+    /* Conteúdo */
+    .content{
+      position:relative;
+      z-index:5;
+      max-width:1100px;
+      width:100%;
+      text-align:center;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 18px;
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:999px;
+      background:rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      margin-bottom:28px;
+      font-size:14px;
+      color:#d6d6d6;
+    }
+
+    .badge::before{
+      content:"";
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#00c853;
+      box-shadow:0 0 12px #00c853;
+    }
+
+    h1{
+      font-size:clamp(3rem, 7vw, 6.5rem);
+      line-height:0.95;
+      font-weight:800;
+      letter-spacing:-0.05em;
+      margin-bottom:24px;
+    }
+
+    .highlight{
+      background:linear-gradient(90deg, #ffffff, #b8ffcf);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .subtitle{
+      max-width:760px;
+      margin:0 auto 42px;
+      font-size:1.15rem;
+      line-height:1.7;
+      color:#d0d0d0;
+    }
+
+    .buttons{
+      display:flex;
+      justify-content:center;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-bottom:60px;
+    }
+
+    .btn{
+      text-decoration:none;
+      padding:18px 32px;
+      border-radius:18px;
+      font-weight:700;
+      font-size:1rem;
+      transition:all .25s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .btn-primary{
+      background:#00c853;
+      color:#04160a;
+      box-shadow:0 10px 30px rgba(0,200,83,0.35);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-3px) scale(1.02);
+      box-shadow:0 16px 40px rgba(0,200,83,0.45);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,0.08);
+      color:white;
+      border:1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,0.14);
+      transform:translateY(-2px);
+    }
+
+    /* Cards */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:22px;
+      margin-top:10px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:26px;
+      padding:28px;
+      backdrop-filter: blur(14px);
+      text-align:left;
+      transition:all .3s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,255,255,0.25);
+    }
+
+    .card h3{
+      font-size:2rem;
+      margin-bottom:8px;
+      color:#ffffff;
+    }
+
+    .card p{
+      color:#cfcfcf;
+      line-height:1.5;
+    }
+
+    /* Seção serviços */
+    .section{
+      padding:100px 20px;
+      background:#101010;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:clamp(2rem,4vw,3.5rem);
+      margin-bottom:18px;
+    }
+
+    .section-sub{
+      text-align:center;
+      color:#bdbdbd;
+      max-width:700px;
+      margin:0 auto 60px;
+      line-height:1.7;
+    }
+
+    .services{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:24px;
+    }
+
+    .service{
+      background:#181818;
+      border:1px solid #242424;
+      border-radius:26px;
+      padding:34px;
+      transition:all .3s ease;
+    }
+
+    .service:hover{
+      transform:translateY(-8px);
+      border-color:#00c853;
+    }
+
+    .icon{
+      width:58px;
+      height:58px;
+      border-radius:18px;
+      background:rgba(0,200,83,0.15);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:28px;
+      margin-bottom:22px;
+    }
+
+    .service h3{
+      margin-bottom:12px;
+      font-size:1.35rem;
+    }
+
+    .service p{
+      color:#c7c7c7;
+      line-height:1.6;
+    }
+
+    /* CTA final */
+    .cta{
+      padding:120px 20px;
+      text-align:center;
+      background:linear-gradient(180deg,#101010,#0b0b0b);
+    }
+
+    .cta-box{
+      max-width:900px;
+      margin:0 auto;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:34px;
+      padding:60px 40px;
+      backdrop-filter: blur(14px);
+    }
+
+    .cta h2{
+      font-size:clamp(2rem,4vw,4rem);
+      margin-bottom:20px;
+    }
+
+    .cta p{
+      color:#cfcfcf;
+      max-width:650px;
+      margin:0 auto 34px;
+      line-height:1.7;
+      font-size:1.05rem;
+    }
+
+    footer{
+      padding:36px 20px;
+      border-top:1px solid rgba(255,255,255,0.08);
+      text-align:center;
+      color:#8f8f8f;
+      background:#080808;
+    }
+
+    /* Responsivo */
+    @media(max-width:768px){
+
+      .bg-reveal{
+        /* desativa efeito no celular */
+        display:none;
+      }
+
+      h1{
+        font-size:3rem;
+      }
+
+      .subtitle{
+        font-size:1rem;
+      }
+
+      .buttons{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+        justify-content:center;
+      }
+
+      .card{
+        text-align:center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+
+    <div class="bg-base"></div>
+    <div class="bg-reveal" id="reveal"></div>
+    <div class="overlay"></div>
+
+    <div class="content">
+
+      <div class="badge">
+        Atendimento especializado em Mogi das Cruzes
+      </div>
+
+      <h1>
+        Encontre o imóvel <br>
+        <span class="highlight">ideal para sua família</span>
+      </h1>
+
+      <p class="subtitle">
+        Compra, venda e avaliação de imóveis com atendimento humano,
+        rápido e transparente. Fale diretamente com o corretor e receba
+        opções que realmente combinam com o seu perfil.
+      </p>
+
+      <div class="buttons">
+
+        <a class="btn btn-primary"
+           href="https://wa.me/5511999999999?text=Olá%20Messias!%20Vi%20seu%20site%20e%20quero%20encontrar%20um%20imóvel."
+           target="_blank">
+
+          💬 Falar no WhatsApp
+        </a>
+
+        <a class="btn btn-secondary"
+           href="https://www.instagram.com/corretormessiasmogi"
+           target="_blank">
+
+          📸 Ver imóveis no Instagram
+        </a>
+      </div>
+
+      <div class="stats">
+
+        <div class="card">
+          <h3>+100</h3>
+          <p>Famílias atendidas em Mogi das Cruzes e região.</p>
+        </div>
+
+        <div class="card">
+          <h3>Rápido</h3>
+          <p>Retorno via WhatsApp em poucos minutos durante o horário comercial.</p>
+        </div>
+
+        <div class="card">
+          <h3>100%</h3>
+          <p>Acompanhamento em todas as etapas da negociação.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <h2 class="section-title">Como posso te ajudar?</h2>
+
+      <p class="section-sub">
+        Atendimento personalizado para quem quer comprar, vender ou investir
+        em imóveis com segurança e praticidade.
+      </p>
+
+      <div class="services">
+
+        <div class="service">
+          <div class="icon">🏡</div>
+          <h3>Compra de imóveis</h3>
+          <p>
+            Casas, apartamentos, terrenos e imóveis em condomínio com
+            seleção personalizada para o seu orçamento.
+          </p>
+        </div>
+
+        <div class="service">
+          <div class="icon">📈</div>
+          <h3>Venda do seu imóvel</h3>
+          <p>
+            Divulgação estratégica, fotos profissionais e atendimento aos
+            interessados para vender mais rápido.
+          </p>
+        </div>
+
+        <div class="service">
+          <div class="icon">💰</div>
+          <h3>Avaliação</h3>
+          <p>
+            Descubra o valor de mercado do seu imóvel com análise da região
+            e dos imóveis comparáveis.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta">
+
+    <div class="cta-box">
+
+      <h2>Vamos encontrar seu próximo imóvel?</h2>
+
+      <p>
+        Me chame agora no WhatsApp e conte o que você procura.
+        Vou selecionar opções reais em Mogi das Cruzes e região
+        sem compromisso.
+      </p>
+
+      <a class="btn btn-primary"
+         href="https://wa.me/5511999999999?text=Olá%20Messias!%20Quero%20receber%20opções%20de%20imóveis."
+         target="_blank">
+
+        📲 Conversar agora no WhatsApp
+      </a>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 @corretormessiasmogi • Corretor de imóveis em Mogi das Cruzes
+  </footer>
+
+  <script>
+    // Efeito estilo "Lando Norris"
+    const reveal = document.getElementById('reveal');
+
+    if (window.innerWidth > 768) {
+
+      document.addEventListener('mousemove', (e) => {
+
+        const x = e.clientX;
+        const y = e.clientY;
+
+        reveal.style.clipPath = `circle(180px at ${x}px ${y}px)`;
+      });
+
+      document.addEventListener('mouseleave', () => {
+        reveal.style.clipPath = 'circle(120px at 50% 50%)';
+      });
+    }
+  </script>
+
+</body>
+</html>

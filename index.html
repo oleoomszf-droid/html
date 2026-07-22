@@ -36,18 +36,12 @@
 
     /* Imagem escura base */
     .bg-base{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(0,0,0,0) 55%,
-      rgba(11,11,11,.55) 80%,
-      #101010 100%
-    ),
-    url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2000&auto=format&fit=crop') center/cover;
-  z-index:1;
-}
+      position:absolute;
+      inset:0;
+      background:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2000&auto=format&fit=crop') center/cover;
+      filter:brightness(0.25);
+      z-index:1;
+    }
 
     /* Imagem revelada pelo mouse */
     .bg-reveal{
@@ -61,7 +55,7 @@
       transition: clip-path 0.08s linear;
     }
 
-      /* Overlay escuro */
+    /* Overlay escuro */
     .overlay{
       position:absolute;
       inset:0;
@@ -70,8 +64,6 @@
         rgba(0,0,0,0.65));
       z-index:3;
     }
-
-}
 
     /* Conteúdo */
     .content{
@@ -207,18 +199,10 @@
     }
 
     /* Seção serviços */
-  .section{
-    position: relative;
-    margin-top: -80px;
-    padding:180px 20px 100px;
-    background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        #0b0b0b 20%,
-        #101010 100%
-    );
-    z-index: 10;
-}
+    .section{
+      padding:100px 20px;
+      background:#101010;
+    }
 
     .container{
       max-width:1200px;
@@ -316,7 +300,7 @@
       text-align:center;
       color:#8f8f8f;
       background:#080808;
-  }
+    }
 
     /* Responsivo */
     @media(max-width:768px){
@@ -325,7 +309,6 @@
         /* desativa efeito no celular */
         display:none;
       }
-
 
       h1{
         font-size:3rem;
@@ -377,32 +360,17 @@
 
       <div class="buttons">
 
-<a class="btn btn-primary"
-   href="https://residencialsense.lmecd.com/"
-   target="_blank">
-   🏢 Residencial Sense
-</a>
-
-<a class="btn btn-primary"
-   href="https://resorturbano.lmecd.com/"
-   target="_blank">
-   🌳 Resort Urbano
-</a>
-  
-        
         <a class="btn btn-primary"
-           href="https://wa.me/5511963848337?text=Olá%20Messias!%20Vi%20seu%20site%20e%20quero%20encontrar%20um%20imóvel."
+           href="https://wa.me/5511999999999?text=Olá%20Messias!%20Vi%20seu%20site%20e%20quero%20encontrar%20um%20imóvel."
            target="_blank">
 
           💬 Falar no WhatsApp
         </a>
 
         <a class="btn btn-secondary"
-           href="https://www.instagram.com/messiascorretormogi"
+           href="https://www.instagram.com/corretormessiasmogi"
            target="_blank">
 
-
-          
           📸 Ver imóveis no Instagram
         </a>
       </div>
@@ -486,7 +454,7 @@
       </p>
 
       <a class="btn btn-primary"
-         href="https://wa.me/5511963848337?text=Olá%20Messias!%20Quero%20receber%20opções%20de%20imóveis."
+         href="https://wa.me/5511999999999?text=Olá%20Messias!%20Quero%20receber%20opções%20de%20imóveis."
          target="_blank">
 
         📲 Conversar agora no WhatsApp
@@ -497,7 +465,7 @@
   </section>
 
   <footer>
-    © 2026 @messiascorretormogi • Corretor de imóveis em Mogi das Cruzes
+    © 2026 @corretormessiasmogi • Corretor de imóveis em Mogi das Cruzes
   </footer>
 
   <script>

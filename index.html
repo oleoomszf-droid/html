@@ -56,14 +56,18 @@
     }
 
     /* Overlay escuro */
-    .overlay{
-      position:absolute;
-      inset:0;
-      background:linear-gradient(to bottom,
-        rgba(0,0,0,0.35),
-        rgba(0,0,0,0.65));
-      z-index:3;
-    }
+   .overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.30) 45%,
+    rgba(0,0,0,0.55) 75%,
+    #101010 100%
+  );
+  z-index:3;
+}
 
     /* Conteúdo */
     .content{
